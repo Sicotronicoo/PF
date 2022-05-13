@@ -1,0 +1,20 @@
+<article style=" width: 100%; display: flex; justify-content: space-around; height: 70%;">
+  <section style="width: 30%; margin: 0 auto; height: 50%; margin-top: 10%;padding-top: 10px;">
+    <form style="display:flex; flex-direction: column; ">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Usuario</mat-label>
+        <input matInput placeholder="Usuario" #userName required>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Password</mat-label>
+        <input matInput placeholder="Password" type="password" required  #userPassword required>
+      </mat-form-field>
+      <button type="button" color="primary" (click)="authService.SignIn(userName.value, userPassword.value)">LOGIN</button>
+      <br>
+      <button mat-stroked-button color="primary">     
+        <a routerLink="/register-user" class="a">SIGN IN</a>
+      </button>
+    </form>
+  </section>
+</article>
