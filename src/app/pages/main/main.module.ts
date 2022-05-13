@@ -1,14 +1,10 @@
+//ANGULAR
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+//APP SECTIONS
 import { MainComponent } from './main.component';
-
 import { MainRoutingModule } from './main-routing.module';
-import { MatSliderModule } from '@angular/material/slider';
-import { BrowserModule } from '@angular/platform-browser'
-
-
-
 
 @NgModule({
   declarations: [
@@ -16,9 +12,7 @@ import { BrowserModule } from '@angular/platform-browser'
   ],
   imports: [
     CommonModule,
-    MainRoutingModule,
-    MatSliderModule,
-    BrowserModule,
+    MainRoutingModule
   ]
 })
 export class MainModule { }

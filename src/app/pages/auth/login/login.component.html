@@ -10,10 +10,10 @@
         <mat-label>Password</mat-label>
         <input matInput placeholder="Password" type="password" required  #userPassword required>
       </mat-form-field>
-      <button type="button" color="primary" (click)="authService.SignIn(userName.value, userPassword.value)">LOGIN</button>
+      <button type="submit" color="primary" (click)="authService.SignIn(userName.value, userPassword.value)">LOGIN</button>
       <br>
       <button mat-stroked-button color="primary">     
-        <a routerLink="/register-user" class="a">SIGN IN</a>
+        <a routerLink="/register" class="a">SIGN UP</a>
       </button>
     </form>
   </section>

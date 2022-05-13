@@ -1,11 +1,10 @@
-<body>
   <mat-toolbar color="primary" style="display: flex;justify-content: space-between; height: 10%; " >
     <div style="display: flex; ">
       <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
       <mat-icon><a routerLink="/main">menu</a></mat-icon>
     </button>  
     </div>
-    <div style="display: flex;width:45%; justify-content: space-evenly;" >  
+     <div style="display: flex;width:45%; justify-content: space-evenly;" >  
       <a routerLink="/main" class="a">MAIN</a>
       <a routerLink="/login" class="a" *ngIf="authService.isLoggedIn == false">LOGIN</a> 
       <a routerLink="/dashboard" class="a" *ngIf="authService.isLoggedIn == true">PERFIL</a> 
@@ -21,4 +20,3 @@
   <footer style="height:20%; width: 100%; background-color:#3f51b5; bottom: 0;
   position: fixed;">
   </footer>
-</body>

@@ -15,8 +15,9 @@
           <mat-label>Password</mat-label>
           <input matInput placeholder="Password" type="password" required  #userPassword required>
         </mat-form-field>
-        <button type="button" color="primary" (click)="authService.SignUp(userName.value, userPassword.value)">SIGN UP</button>
+        <button type="button" color="primary" (click)="authService.SignUp(userName.value, userPassword.value)"><a routerLink="/main">SIGN UP</a></button>
         <br>
+        <span>Si ya estas registrdo pulsa <a routerLink="/login">aqui.</a></span>
       </form>
     </section>
   </article>
