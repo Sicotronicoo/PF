@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 //APP SECTIONS
 import { MainComponent } from './main.component';
 import { MainRoutingModule } from './main-routing.module';
+import { AppRoutingModule } from 'src/app/app-routing.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { MainRoutingModule } from './main-routing.module';
   ],
   imports: [
     CommonModule,
-    MainRoutingModule
+    MainRoutingModule,
+   // AppRoutingModule
   ]
 })
 export class MainModule { }

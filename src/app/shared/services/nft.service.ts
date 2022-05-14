@@ -36,7 +36,7 @@ export class NftService {
   }
   getNft(){
     return this.angularFirestore
-    .collection("GAMESNFT")
+    .collection("GAMESNFT") 
     .snapshotChanges()
   }
   updateNft(nft: Nft, id){
