@@ -44,7 +44,7 @@ export class OfertasnftComponent implements OnInit {
       this.nameNft = user.nameNft;
       this.web = user.web;
     });
-
+    
     console.log(this.nftService.getByName('axie'));
   }
   getNewOffer(){

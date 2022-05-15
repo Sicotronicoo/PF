@@ -7,4 +7,10 @@ export class Offer {
     porcentaje: string;
     duracion: string;
     descripcion: string;
+    
+    constructor(id, user, nft){
+        this.id = id;
+        this.user = user;
+        this.nft = nft;
+    }
 }
