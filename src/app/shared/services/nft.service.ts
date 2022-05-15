@@ -34,11 +34,32 @@ export class NftService {
       await setDoc(docRef, docData);
       resolve(docRef);
     });
+    
+  }
+  async createOffer(path: string, data: Data) {
+    const id = doc(collection(this.db, path)).id;
+
+    const docData = {
+      ...data,
+      id,
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp()
+    }
+    const docRef = doc(this.db, path, id);
+    return new Promise<DocumentReference<DocumentData>>(async (resolve) => {
+      await setDoc(docRef, docData);
+      resolve(docRef);
+    });
   }
   getNft() {
     return this.angularFirestore
       .collection("GAMESNFT")
       .snapshotChanges()
+  }
+  getOffers(){
+    return this.angularFirestore
+    .collection('OFFERS')
+    .snapshotChanges()
   }
 
   getByName(name: string): Observable<Nft> {

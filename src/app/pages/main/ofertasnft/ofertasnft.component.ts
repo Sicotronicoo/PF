@@ -29,17 +29,25 @@ export class OfertasnftComponent implements OnInit {
   nameCrypto: string;
   nameNft: string;
   web: string;
+  isShown: boolean = false ; // hidden by default
+  toggleShow() {
 
+    this.isShown = ! this.isShown;
+    
+    }
   ngOnInit(): void {
     const routeParams = this.route.snapshot.paramMap;
     const productIdFromRoute = routeParams.get('nameNft');
     this.nftService.getByName(productIdFromRoute).subscribe(user => {
       this.id = user.id;
       this.nameCrypto = user.nameCrypto;
-      this.nameNft = user.nameCrypto;
+      this.nameNft = user.nameNft;
       this.web = user.web;
     });
 
     console.log(this.nftService.getByName('axie'));
   }
+  getNewOffer(){
+
+  };
 }

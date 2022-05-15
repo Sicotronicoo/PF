@@ -1,0 +1,24 @@
+<h1>CREAR OFERTA</h1>
+<form [formGroup]="form" (submit)="save($event)" style="display:flex; flex-direction: column;">
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>USER</mat-label>
+        <input matInput placeholder="NOMBRE NFT" formControlName="user" required>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>JUEGO NFT</mat-label>
+        <input matInput placeholder="CRYPTOMONEDA" formControlName="nft" required>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>PORCENTAJE</mat-label>
+        <input matInput placeholder="PORCENTAJE" formControlName="porcentaje" required>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>DURACIÓN APROXIMADA</mat-label>
+        <input matInput placeholder="WEB" formControlName="duracion" required>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>DESCRIPCIÓN</mat-label>
+        <input matInput placeholder="WEB" formControlName="descripcion" required>
+    </mat-form-field>
+    <button type="submit"  color="primary">SAVE</button>
+</form>

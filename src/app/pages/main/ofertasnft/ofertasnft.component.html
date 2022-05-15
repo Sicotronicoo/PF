@@ -1,9 +1,24 @@
-<p>ofertasnft works!</p>
-<h1>{{id}}</h1>
-<h1>{{nameCrypto}}</h1>
-<h1>{{nameNft}}</h1>
-<h1>{{web}}</h1>
 
-<router-outlet>
+
+<article style="display:flex; flex-direction: row">
+    <section style="display:flex; flex-direction: column; width:40%;" >
+    <h1>{{id}}</h1>
+    <h1>{{nameCrypto}}</h1>
+    <h1>{{nameNft}}</h1>
+    <h1>{{web}}</h1>
+    <button *ngIf="isShown" type="button" (click)="toggleShow()">OFERTAS DISPONIBLES</button>
+    <button *ngIf="!isShown" type="button" (click)="toggleShow()">CREAR OFERTA</button>
+
+    </section>
+    <section *ngIf="isShown" style="display:flex; flex-direction: column; width:550px;" >
+        <app-newoffer>
+
+        </app-newoffer> 
+    </section>
+    <section *ngIf="!isShown" style="display:flex; flex-direction: column; width:550px; background-color:red;" >
+        <app-listoffers>
+
+        </app-listoffers>
+    </section>
+    </article>
     
-</router-outlet>

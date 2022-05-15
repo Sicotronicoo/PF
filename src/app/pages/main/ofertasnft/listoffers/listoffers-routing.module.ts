@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from 'src/app/shared/guard/auth.guard';
-import { OfertasnftComponent } from './ofertasnft.component';
+import { ListoffersComponent } from './listoffers.component';
 
 const routes: Routes = [
-  { path: '', component: OfertasnftComponent},
+  { path: '', component: ListoffersComponent},
+
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class OfertasnftRoutingModule { }
+export class ListoffersRoutingModule { }

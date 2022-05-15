@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { MainComponent } from './main.component';
 import { MainRoutingModule } from './main-routing.module';
 import { AppRoutingModule } from 'src/app/app-routing.module';
+import { NftService } from 'src/app/shared/services/nft.service';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,6 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
   imports: [
     CommonModule,
     MainRoutingModule,
-   // AppRoutingModule
   ]
 })
 export class MainModule { }
