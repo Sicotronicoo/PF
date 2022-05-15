@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentData } from '@angular/fire/compat/firestore';
-import { Firestore, setDoc } from '@angular/fire/firestore';
+import { Firestore, setDoc, getDoc } from '@angular/fire/firestore';
 import { collection, doc, DocumentReference, serverTimestamp } from 'firebase/firestore';
+import { map, Observable } from 'rxjs';
 import { Nft } from './interfaces/nft';
 
 interface Data {
@@ -34,27 +35,47 @@ export class NftService {
       resolve(docRef);
     });
   }
-  getNft(){
+  getNft() {
     return this.angularFirestore
-    .collection("GAMESNFT") 
-    .snapshotChanges()
+      .collection("GAMESNFT")
+      .snapshotChanges()
   }
-  updateNft(nft: Nft, id){
-    return this.angularFirestore
-    .collection("GAMESNFT")
-    .doc(id)
-    .update({
-      id: nft.id,
-      updateAt: nft.updateAt,
-      nameNft: nft.nameNft,
-      nameCrypto: nft.nameCrypto,
-      web: nft.web
-    });
+
+  getByName(name: string): Observable<Nft> {
+    const collection = this.angularFirestore.collection<Nft>('GAMESNFT', ref => ref.where('nameNft', '==', name))
+    const user$ = collection
+      .valueChanges()
+      .pipe(
+        map(users => {
+          const user = users[0];
+          console.log(user);
+          return user;
+        })
+      );
+    return user$;
   }
-  deleteNft(nft){
+
+
+  updateNft(nft: Nft, id) {
     return this.angularFirestore
-    .collection("GAMESNFT")
-    .doc(nft.id)
-    .delete();
+      .collection("GAMESNFT")
+      .doc(id)
+      .update({
+        id: nft.id,
+        updateAt: nft.updateAt,
+        nameNft: nft.nameNft,
+        nameCrypto: nft.nameCrypto,
+        web: nft.web
+      });
+  }
+  deleteNft(nft) {
+    return this.angularFirestore
+      .collection("GAMESNFT")
+      .doc(nft.id)
+      .delete();
   }
 }
+
+/*   getOfertas(fecha) {
+    return this.angularFirestore.collection('GAMESNFT').doc(fecha).valueChanges()
+    }  */
