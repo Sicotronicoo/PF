@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NftService } from 'src/app/shared/services/nft.service';
+import { OfferService } from 'src/app/shared/services/offer.service';
 
 @Component({
   selector: 'app-newoffer',
@@ -11,7 +12,7 @@ import { NftService } from 'src/app/shared/services/nft.service';
 })
 export class NewofferComponent implements OnInit {
   constructor(
-    private nftService: NftService,
+    private offerService: OfferService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
 
@@ -27,13 +28,12 @@ export class NewofferComponent implements OnInit {
   })
   ngOnInit(): void {
      
-    this.nftService.getOfferByName('axie').subscribe
   }
 
   async save(event: Event){
     event.preventDefault();
     if(!this.form.invalid){
-      const doc = await this.nftService.createOffer("OFFERS", this.form.value, this.id);
+      const doc = await this.offerService.createOffer("OFFERS", this.form.value, this.id);
       const id = doc.id;
       //const file = await this.storageService.uploadFile(`candidates/${id}/${Date.now()}_${this.file.name}`, this.file);
       //this.file = null;

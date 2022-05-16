@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentData } from '@angular/fire/compat/firestore';
 import { Firestore, setDoc, getDoc } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
-import { collection, doc, DocumentReference, serverTimestamp } from 'firebase/firestore';
+import { collection, doc, DocumentReference, serverTimestamp, query, where, getDocs } from 'firebase/firestore';
 import { map, Observable } from 'rxjs';
 import { Nft } from './interfaces/nft';
 import { Offer } from './interfaces/offer';
@@ -19,7 +19,6 @@ export class NftService {
   constructor(
     private db: Firestore,
     private angularFirestore: AngularFirestore,
-    private route: ActivatedRoute,
 
   ) { }
 
@@ -39,61 +38,25 @@ export class NftService {
       resolve(docRef);
     });
     
-  }
-  async createOffer(path: string, data: Data, nameNft: string) {
-    const id = doc(collection(this.db, path)).id;
-
-    const docData = {
-      ...data,
-      id,
-      nameNft: nameNft,
-      createdAt: serverTimestamp(),
-      updatedAt: serverTimestamp()
-    }
-    const docRef = doc(this.db, path, id);
-    return new Promise<DocumentReference<DocumentData>>(async (resolve) => {
-      await setDoc(docRef, docData);
-      resolve(docRef);
-    });
-  }
+  } 
   getNft() {
     return this.angularFirestore
       .collection("GAMESNFT")
       .snapshotChanges()
   }
-  getOffers(){
-    return this.angularFirestore
-    .collection('OFFERS')
-    .snapshotChanges()
-  }
 
-  getByName(name: string): Observable<Nft> {
+  getNftByName(name: string): Observable<Nft> {
     const collection = this.angularFirestore.collection<Nft>('GAMESNFT', ref => ref.where('nameNft', '==', name))
     const user$ = collection
       .valueChanges()
       .pipe(
         map(users => {
           const user = users[0];
-          console.log(user);
           return user;
         })
       );
     return user$;
   }
-  getOfferByName(name: string): Observable<Offer> {
-    const collection = this.angularFirestore.collection<Offer>('OFFERS', ref => ref.where('nft', '==', name))
-    const user$ = collection
-      .valueChanges()
-      .pipe(
-        map(users => {
-          const user = users[0];
-          console.log(user);
-          return user;
-        })
-      );
-    return user$;
-  }
-
 
   updateNft(nft: Nft, id) {
     return this.angularFirestore
@@ -114,7 +77,3 @@ export class NftService {
       .delete();
   }
 }
-
-/*   getOfertas(fecha) {
-    return this.angularFirestore.collection('GAMESNFT').doc(fecha).valueChanges()
-    }  */

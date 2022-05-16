@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Offer } from 'src/app/shared/services/interfaces/offer';
-import { NftService } from 'src/app/shared/services/nft.service';
+import { OfferService } from '../../../../shared/services/offer.service'
 
 @Component({
   selector: 'app-listoffers',
@@ -11,26 +11,23 @@ import { NftService } from 'src/app/shared/services/nft.service';
 export class ListoffersComponent implements OnInit {
 
   constructor(
-    private nftService: NftService,
+    private offerService: OfferService,
+    private route: ActivatedRoute,
+  ) {}
 
-  ) { }
+  routeParams = this.route.snapshot.paramMap;
+  id = this.routeParams.get('nameNft');
 
   offers: Offer[];
-  id: string
+
   ngOnInit(): void {
-     this.nftService.getOffers().subscribe((res) => {
+    this.offerService.getOffersByName(this.id).subscribe((res) => {
       this.offers = res.map( (e) =>{
         return{
           id: e.payload.doc.id,
           ...(e.payload.doc.data() as Offer)
         };
       });
-      console.log(this.offers);
     });
-
-        //OBTENER NOMBRE NFT DESDE PATH
-    
   }
-
-
 }

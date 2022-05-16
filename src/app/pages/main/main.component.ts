@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Firestore } from '@angular/fire/firestore';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { Offer } from 'src/app/shared/services/interfaces/offer';
 import { NftService } from 'src/app/shared/services/nft.service';
 
 
@@ -15,10 +18,9 @@ export class MainComponent implements OnInit {
     private nftService: NftService,    
   ) {}
 
-   nfts: Nft[];
-
+  nfts: Nft[];
+  
   ngOnInit() {
-    //console.log(this.nftService.getNft());
     this.nftService.getNft().subscribe((res) => {
       this.nfts = res.map( (e) =>{
         return{
@@ -26,7 +28,6 @@ export class MainComponent implements OnInit {
           ...(e.payload.doc.data() as Nft)
         };
       });
-      console.log(this.nfts);
     })
   }  
 }
