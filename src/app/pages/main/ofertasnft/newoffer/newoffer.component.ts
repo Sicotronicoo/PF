@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NftService } from 'src/app/shared/services/nft.service';
 import { OfferService } from 'src/app/shared/services/offer.service';
 
@@ -15,10 +15,12 @@ export class NewofferComponent implements OnInit {
     private offerService: OfferService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
+    private router: Router
 
   ) { }
-   routeParams = this.route.snapshot.paramMap;
-   id = this.routeParams.get('nameNft');
+
+  routeParams = this.route.snapshot.paramMap;
+  id = this.routeParams.get('nameNft');
 
   form = this.fb.group({
     user: [null, Validators.required],
@@ -26,6 +28,7 @@ export class NewofferComponent implements OnInit {
     duracion:[null, Validators.required],
     descripcion:[null, Validators.required],
   })
+
   ngOnInit(): void {
      
   }
@@ -36,7 +39,6 @@ export class NewofferComponent implements OnInit {
       const doc = await this.offerService.createOffer("OFFERS", this.form.value, this.id);
       const id = doc.id;
       //const file = await this.storageService.uploadFile(`candidates/${id}/${Date.now()}_${this.file.name}`, this.file);
-      //this.file = null;
       this.form.reset();
     }
   }

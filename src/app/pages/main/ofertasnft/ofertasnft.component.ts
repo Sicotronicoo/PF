@@ -7,6 +7,7 @@ import { collection, where, doc, getDoc } from 'firebase/firestore';
 import { map, Observable } from 'rxjs';
 import { Nft } from '../../../shared/services/interfaces/nft';
 import { NftService } from '../../../shared/services/nft.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 
 
@@ -22,7 +23,9 @@ export class OfertasnftComponent implements OnInit {
     private route: ActivatedRoute,
     private db: AngularFirestore,
     private fs: Firestore,
-    private nftService: NftService,
+    public nftService: NftService,
+    public authService: AuthService,
+
   ) { }
 
   id: string;
@@ -30,10 +33,9 @@ export class OfertasnftComponent implements OnInit {
   nameNft: string;
   web: string;
   isShown: boolean = false ; // hidden by default
+  delete: boolean = false;
   toggleShow() {
-
-    this.isShown = ! this.isShown;
-    
+    this.isShown = ! this.isShown;    
     }
   ngOnInit(): void {
     const routeParams = this.route.snapshot.paramMap;
@@ -44,6 +46,13 @@ export class OfertasnftComponent implements OnInit {
       this.nameNft = user.nameNft;
       this.web = user.web;
     });
-       
+    if(this.delete){
+    }
   }
+  
+  deleteNft(){
+    this.nftService.delete(this.nameNft);
+    console.log('El NFT; ' + this.delete + ' ha sido borrado.');
+  }
+
 }

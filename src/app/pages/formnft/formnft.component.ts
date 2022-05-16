@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NftService } from 'src/app/shared/services/nft.service';
 
 @Component({
@@ -12,6 +13,7 @@ export class FormnftComponent implements OnInit {
   constructor(
     private nftService: NftService,
     private fb: FormBuilder,
+    private router: Router
   ) { }
 
   form = this.fb.group({
@@ -28,8 +30,7 @@ export class FormnftComponent implements OnInit {
       const doc = await this.nftService.create("GAMESNFT", this.form.value);
       const id = doc.id;
       //const file = await this.storageService.uploadFile(`candidates/${id}/${Date.now()}_${this.file.name}`, this.file);
-      //this.file = null;
-      this.form.reset();
+      this.router.navigate(["/main"]);
     }
   }
 }

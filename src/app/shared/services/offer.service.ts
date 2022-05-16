@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentData } from '@angular/fire/compat/firestore';
 import { Firestore, setDoc, getDoc } from '@angular/fire/firestore';
-import { collection, doc, DocumentReference, serverTimestamp, query, where, getDocs } from 'firebase/firestore';
+import { collection, doc, DocumentReference, serverTimestamp, query, where, getDocs, deleteDoc } from 'firebase/firestore';
 import { Offer } from './interfaces/offer';
 
 interface Data {
@@ -47,6 +47,9 @@ export class OfferService {
     return this.angularFirestore
     .collection<Offer>('OFFERS', ref => ref.where('nameNft', '==', nameNft))
     .snapshotChanges()
+  }
+  delete(id: string){
+    return deleteDoc(doc(this.db, "OFFERS", id));
   }
 
 }

@@ -5,6 +5,7 @@
         <span>{{offer.nft}}</span>
         <span>{{offer.porcentaje}}</span>
         <span>{{offer.descripcion}}</span>
+        <button type="button" *ngIf="authService.isLoggedIn == true" routerLink="/main/{{id}}" (click)="deleteOffer()">BORRAR OFERTA</button>
     </article>
   </a>
   
