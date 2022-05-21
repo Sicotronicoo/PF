@@ -1,5 +1,5 @@
 <!-- Sidebar navigation -->
-<div class="container-fluid">
+<!-- <div class="container-fluid">
   <a (click)="authService.SignOut()">Log out</a>
 
   <div class="row" *ngIf="authService.userData as user">
@@ -12,4 +12,6 @@
               </div>
             </div>
           </div>
-</div>
+</div> -->
+<button class="btn btn-primary btn-block m-2" (click)="logout()">LOGOUT</button>
+<button class="btn btn-primary btn-block m-2" (click)="obtenerUsuarioLogeado()">USUARIO</button>

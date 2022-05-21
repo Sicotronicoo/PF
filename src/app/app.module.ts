@@ -26,6 +26,7 @@ import { AuthService } from "./shared/services/auth.service";
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { AuthGuard } from './shared/guard/auth.guard';
 
 
 

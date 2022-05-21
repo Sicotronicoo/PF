@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from "../../../shared/services/auth.service";
 
 @Component({
@@ -10,18 +11,29 @@ import { AuthService } from "../../../shared/services/auth.service";
 export class SignUpComponent implements OnInit {
 
   constructor(
-    public authService: AuthService
-  ) { }
-  
+    public authService: AuthService,
+    private router: Router,
+    private fb: FormBuilder,
+
+  ) {
+
+  }
+  hide = true;
+
   ngOnInit(): void {
   }
 
-  form: FormGroup= new FormGroup({
-    email: new FormControl('', [Validators.email, Validators.required ]),
-    password: new FormControl('', [Validators.required, Validators.min(3) ])
+  form = this.fb.group({
+    email: new FormControl(null, [Validators.email, Validators.required]),
+    password: new FormControl(null, [Validators.required])
   })
-  hide = true;
-  get emailInput() { return this.form.get('email'); }
-  get passwordInput() { return this.form.get('password'); }  
 
+  async save(event: Event){
+    event.preventDefault();
+    if(!this.form.invalid){
+      const doc = await this.authService.create("USERS", this.form.value);
+      const id = doc.id;
+      this.router.navigate(["/main"]);
+    }
+  }
 }

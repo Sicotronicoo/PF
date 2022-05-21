@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { NftService } from 'src/app/shared/services/nft.service';
 import { OfferService } from 'src/app/shared/services/offer.service';
 
@@ -15,7 +16,8 @@ export class NewofferComponent implements OnInit {
     private offerService: OfferService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public authService: AuthService
 
   ) { }
 

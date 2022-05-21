@@ -5,19 +5,19 @@
   margin-top: 10%;
   padding-top: 10px;
   ">
-      <form class="example-form" style="display:flex; flex-direction: column; ">
+      <form [formGroup]="form" (submit)="save($event)" class="example-form" style="display:flex; flex-direction: column; ">
         <mat-form-field class="example-full-width" appearance="fill">
           <mat-label>Usuario</mat-label>
-          <input matInput placeholder="Usuario" #userName required>
+          <input matInput placeholder="Usuario" required formControlName="email">
         </mat-form-field>
   
         <mat-form-field class="example-full-width" appearance="fill">
           <mat-label>Password</mat-label>
-          <input matInput placeholder="Password" type="password" required  #userPassword required>
+          <input matInput placeholder="Password" type="password" required  formControlName="password">
         </mat-form-field>
-        <button type="button" color="primary" (click)="authService.SignUp(userName.value, userPassword.value)"><a routerLink="/main">SIGN UP</a></button>
+        <button type="submit"  [disabled]="!form.valid" color="primary">RESGISTRO</button>
         <br>
-        <span>Si ya estas registrdo pulsa <a routerLink="/login">aqui.</a></span>
+        <span>Si ya estas registrdo pulsa <a routerLink="/login">aqui</a>.</span>
       </form>
     </section>
   </article>

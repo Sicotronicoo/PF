@@ -6,9 +6,9 @@
     </div>
      <div style="display: flex;width:45%; justify-content: space-evenly;" >  
       <a routerLink="/main" class="a">MAIN</a>
-      <a routerLink="/login" class="a" *ngIf="authService.isLoggedIn == false">LOGIN</a> 
-      <a routerLink="/dashboard" class="a" *ngIf="authService.isLoggedIn == true">PERFIL</a> 
-      <a routerLink="/create-nft" class="a" *ngIf="authService.isLoggedIn == true">ADD NFT</a> 
+      <a routerLink="/login" class="a" *ngIf="authService.isLoggedIn() == false">LOGIN</a> 
+      <a routerLink="/dashboard" class="a" *ngIf="authService.isLoggedIn() == true">PERFIL</a> 
+      <a routerLink="/createnft" class="a" *ngIf="authService.isLoggedIn() == true">ADD NFT</a> 
     </div> 
   </mat-toolbar>
   

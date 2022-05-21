@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentData } from '@angular/fire/compat/firestore';
 import { Firestore, setDoc, getDoc } from '@angular/fire/firestore';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { collection, doc, DocumentReference, serverTimestamp, query, where, getDocs, deleteDoc } from 'firebase/firestore';
 import { map, Observable } from 'rxjs';
 import { Nft } from './interfaces/nft';
@@ -19,6 +19,7 @@ export class NftService {
   constructor(
     private db: Firestore,
     private angularFirestore: AngularFirestore,
+    private router: Router
 
   ) { }
 
@@ -70,13 +71,10 @@ export class NftService {
         web: nft.web
       });
   }
-  delete(name: string){
-    return deleteDoc(doc(this.db, "GAMESNFT", name));
+  async delete(name: string){
+    await this.router.navigate(["/main"]);
+
+    return  deleteDoc(doc(this.db, "GAMESNFT", name));
   }
+
 }
-/*   deleteNft(nft) {
-    return this.angularFirestore
-      .collection("GAMESNFT")
-      .doc(nft.id)
-      .delete();
-  } */

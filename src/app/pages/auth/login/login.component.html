@@ -1,20 +1,19 @@
 <article style=" width: 100%; display: flex; justify-content: space-around; height: 70%;">
   <section style="width: 30%; margin: 0 auto; height: 50%; margin-top: 10%;padding-top: 10px;">
-    <form style="display:flex; flex-direction: column; ">
+    <form [formGroup]="form"  style="display:flex; flex-direction: column; ">
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Usuario</mat-label>
-        <input matInput placeholder="Usuario" #userName required>
+        <input matInput placeholder="Usuario" required formControlName="email">
       </mat-form-field>
 
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Password</mat-label>
-        <input matInput placeholder="Password" type="password" required  #userPassword required>
+        <input matInput placeholder="Password" type="password" required  formControlName="password">
       </mat-form-field>
-      <button type="submit" color="primary" (click)="authService.SignIn(userName.value, userPassword.value)">LOGIN</button>
       <br>
-      <button mat-stroked-button color="primary">     
-        <a routerLink="/register" class="a">SIGN UP</a>
-      </button>
+        <button class="a" (click)="ingresar()" [disabled]="!form.valid">INICIAR SESIÓN</button>
     </form>
   </section>
 </article>
+<a routerLink="/register">Registrarse</a>
+

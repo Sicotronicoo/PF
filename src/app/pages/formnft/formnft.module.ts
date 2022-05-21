@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { AuthGuard } from 'src/app/shared/guard/auth.guard';
 
 
 @NgModule({
@@ -26,7 +27,7 @@ import { MatInputModule } from '@angular/material/input';
     MatButtonModule,
     ReactiveFormsModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuard],
 
 })
 export class FormnftModule { }

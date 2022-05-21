@@ -36,7 +36,7 @@ export class OfertasnftComponent implements OnInit {
   delete: boolean = false;
   toggleShow() {
     this.isShown = ! this.isShown;    
-    }
+  }
   ngOnInit(): void {
     const routeParams = this.route.snapshot.paramMap;
     const productIdFromRoute = routeParams.get('nameNft');

@@ -6,17 +6,17 @@
     <h1>{{nameCrypto}}</h1>
     <h1>{{nameNft}}</h1>
     <h1>{{web}}</h1>
-    <button *ngIf="isShown" type="button" (click)="toggleShow()">OFERTAS DISPONIBLES</button>
-    <button *ngIf="!isShown" type="button" (click)="toggleShow()">CREAR OFERTA</button>
-    <button type="button" *ngIf="authService.isLoggedIn == true && !isShown" routerLink="/main" (click)="deleteNft()">BORRAR CRYPTO</button>
+    <button *ngIf="isShown" type="button" (click)="toggleShow()">CREAR OFERTA</button>
+    <button *ngIf="!isShown" type="button" (click)="toggleShow()">OFERTAS DISPONIBLES</button>
+    <button type="button" *ngIf="authService.isLoggedIn() == true && !isShown" routerLink="/main" (click)="deleteNft()">BORRAR CRYPTO</button>
 
     </section>
-    <section *ngIf="isShown" style="display:flex; flex-direction: column; width:550px;" >
+    <section *ngIf="!isShown" style="display:flex; flex-direction: column; width:550px;" >
         <app-newoffer>
 
         </app-newoffer> 
     </section>
-    <section *ngIf="!isShown" style="display:flex; flex-direction: column; width:550px; background-color:red;" >
+    <section *ngIf="isShown" style="display:flex; flex-direction: column; width:550px; background-color:red;" >
         <app-listoffers>
 
         </app-listoffers>

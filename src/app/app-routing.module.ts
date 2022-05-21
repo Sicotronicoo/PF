@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './pages/main/main.component';
+import { AuthGuard } from './shared/guard/auth.guard';
 
 
 const routes: Routes = [
@@ -10,12 +11,9 @@ const routes: Routes = [
   { path: 'main', loadChildren: () => import('./pages/main/main.module').then(m => m.MainModule)},
   { path: 'register', loadChildren: () => import('./pages/auth/sign-up/sign-up.module').then(m => m.SignUpModule) },
   { path: 'login', loadChildren: () => import('./pages/auth/login/login.module').then(m => m.LoginModule)},
-  { path: 'dashboard', loadChildren: () => import('./pages/auth/dashboard/dashboard.module').then(m => m.DashboardModule)},
-  { path: 'create-nft', loadChildren: () => import('./pages/formnft/formnft.module').then(m => m.FormnftModule)},
- // { path: 'ofertanft', loadChildren: () => import('./pages/main/ofertasnft/ofertasnft.module').then(m => m.OfertasnftModule)},
+  { path: 'dashboard', loadChildren: () => import('./pages/auth/dashboard/dashboard.module').then(m => m.DashboardModule), canActivate: [AuthGuard]},
+  { path: 'createnft', loadChildren: () => import('./pages/formnft/formnft.module').then(m => m.FormnftModule),  canActivate: [AuthGuard]},
 
-/*   { path: 'nfts/:id', component: MainComponent },
- */
 ];
 
 @NgModule({
