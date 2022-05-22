@@ -19,13 +19,17 @@ export class NewofferComponent implements OnInit {
     private router: Router,
     public authService: AuthService
 
-  ) { }
+  ) {
+    this.authService.getUserLogged().subscribe(res => {
+      this.userId = res?.email;          
+   });
+   }
 
   routeParams = this.route.snapshot.paramMap;
   id = this.routeParams.get('nameNft');
+  userId: string;
 
   form = this.fb.group({
-    user: [null, Validators.required],
     porcentaje:[null, Validators.required],
     duracion:[null, Validators.required],
     descripcion:[null, Validators.required],
@@ -38,10 +42,11 @@ export class NewofferComponent implements OnInit {
   async save(event: Event){
     event.preventDefault();
     if(!this.form.invalid){
-      const doc = await this.offerService.createOffer("OFFERS", this.form.value, this.id);
+      const doc = await this.offerService.createOffer("OFFERS", this.form.value, this.id, this.userId);
       const id = doc.id;
       //const file = await this.storageService.uploadFile(`candidates/${id}/${Date.now()}_${this.file.name}`, this.file);
       this.form.reset();
+      this.router.navigate(["/main"]);
     }
   }
 }

@@ -20,13 +20,14 @@ export class OfferService {
 
   ) { }
 
-  async createOffer(path: string, data: Data, nameNft: string) {
+  async createOffer(path: string, data: Data, nameNft: string, userId:string) {
     const id = doc(collection(this.db, path)).id;
 
     const docData = {
       ...data,
       id,
       nameNft: nameNft,
+      userId: userId,
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp()
     }
@@ -51,6 +52,5 @@ export class OfferService {
   delete(id: string){
     return deleteDoc(doc(this.db, "OFFERS", id));
   }
-
+ 
 }
-

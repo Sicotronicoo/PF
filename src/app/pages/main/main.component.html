@@ -1,7 +1,7 @@
 <a style="display:flex; flex-direction: colum;width:200px; height:200px;" *ngFor="let nft of nfts" [routerLink]="[nft.nameNft]">
-  <article style="display:flex; flex-direction: column;width:150px; height:150px; background-color:brown; margin: 3%;">
-    <span>{{nft.nameNft}}</span>
-      <span>{{nft.nameCrypto}}</span>
-      <span>{{nft.web}}</span>
+  <article style="display:flex; flex-direction: column;width:150px; height:150px; background-color:grey; margin: 3%;">
+    <span style="color: white">{{nft.nameNft}}</span>
+      <span style="color: white">{{nft.nameCrypto}}</span>
+      <span style="color: white">{{nft.web}}</span>
   </article>
 </a>

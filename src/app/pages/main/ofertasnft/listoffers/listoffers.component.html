@@ -1,11 +1,13 @@
 <a style="display:flex; flex-direction: colum;width:200px; height:200px;" *ngFor="let offer of offers">
     <article style="display:flex; flex-direction: column;width:150px; height:150px; background-color:brown; margin: 3%;">
       <span>{{offer.id}}</span>
-        <span>{{offer.user}}</span>
+        <span>{{offer.userId}}</span>
         <span>{{offer.nft}}</span>
         <span>{{offer.porcentaje}}</span>
         <span>{{offer.descripcion}}</span>
-        <button type="button" *ngIf="authService.isLoggedIn() == true" (click)="deleteOffer()">BORRAR OFERTA</button>
+        <button type="button" *ngIf="checkUserId(offer.userId) == true && authService.isLoggedIn() == true" (click)="deleteOffer(offer.id)">BORRAR OFERTA</button>
+        <button type="button" *ngIf="checkUserId(offer.userId) == false && authService.isLoggedIn() == true" routerLink="createnft" (click)="save(offer.id)" routerLink="/dashboard">APLICAR A OFERTA</button>
+        <button type="button" *ngIf="checkUserId(offer.userId) == true && authService.isLoggedIn() == true" routerLink="createnft" routerLink="/dashboard">DETALLES DE LA OFERTA</button>
     </article>
   </a>
   

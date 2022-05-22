@@ -8,7 +8,7 @@
     <h1>{{web}}</h1>
     <button *ngIf="isShown" type="button" (click)="toggleShow()">CREAR OFERTA</button>
     <button *ngIf="!isShown" type="button" (click)="toggleShow()">OFERTAS DISPONIBLES</button>
-    <button type="button" *ngIf="authService.isLoggedIn() == true && !isShown" routerLink="/main" (click)="deleteNft()">BORRAR CRYPTO</button>
+    <button type="button" *ngIf="authService.isLoggedIn() == true && !isShown" routerLink="createnft" (click)="deleteNft()">BORRAR CRYPTO</button>
 
     </section>
     <section *ngIf="!isShown" style="display:flex; flex-direction: column; width:550px;" >

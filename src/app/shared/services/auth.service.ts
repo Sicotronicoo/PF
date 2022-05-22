@@ -8,6 +8,7 @@ import { AngularFirestore, AngularFirestoreDocument, DocumentData, } from '@angu
 import { Router } from '@angular/router';
 import { collection, doc, DocumentReference, serverTimestamp, setDoc } from 'firebase/firestore';
 import { Firestore } from '@angular/fire/firestore';
+import { stringify } from 'querystring';
 
 interface Data {
   [x: string]: any;
@@ -74,5 +75,12 @@ export class AuthService {
 
   isLoggedIn(){
   return this.loggedIn;
+  }
+  checkUserId(userId: string){ 
+    let user: string;
+    this.afauth.authState.subscribe(res => {
+      user = res?.email;
+    });
+    return user === userId;
   }
 }

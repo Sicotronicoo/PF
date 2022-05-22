@@ -2,10 +2,6 @@
 <article *ngIf="authService.isLoggedIn() == true">
     <form [formGroup]="form" (submit)="save($event)" style="display:flex; flex-direction: column;">
         <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>USER</mat-label>
-            <input matInput placeholder="NOMBRE NFT" formControlName="user" required>
-        </mat-form-field>
-        <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>PORCENTAJE</mat-label>
             <input matInput placeholder="PORCENTAJE" formControlName="porcentaje" required>
         </mat-form-field>
