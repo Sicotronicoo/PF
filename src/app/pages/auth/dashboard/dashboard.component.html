@@ -13,5 +13,31 @@
             </div>
           </div>
 </div> -->
+<h1>{{id}}</h1>
+<h1>{{email}}</h1>
+<h1>{{displayName}}</h1>
+<h1>here</h1>
 <button class="btn btn-primary btn-block m-2" (click)="logout()">LOGOUT</button>
-<button class="btn btn-primary btn-block m-2" (click)="obtenerUsuarioLogeado()">USUARIO</button>
+<!-- <button class="btn btn-primary btn-block m-2" (click)="obtenerUsuarioLogeado()">USUARIO</button>
+ -->
+<a style="display:flex; flex-direction: colum;width:200px; height:200px;" *ngFor="let offer of offers">
+  <h1>OFERTAS CREADAS</h1>
+  <br>
+  <article style="display:flex; flex-direction: column;width:150px; height:150px; background-color:darkblue; margin: 3%; color:white;">    
+    <span>{{offer.id}}</span>
+      <span>{{offer.userId}}</span>
+      <span>{{offer.nameNft}}</span>
+      <span>{{offer.descripcion}}</span>
+      <span>{{offer.porcentaje}}</span>
+      <span>{{offer.duracion}}</span>
+  </article>
+</a>
+<a style="display:flex; flex-direction: colum;width:200px; height:200px;" *ngFor="let apply of applysOffer">
+  <h1>OFERTAS APLICADAS</h1>
+  <br>
+  <article style="display:flex; flex-direction: column;width:150px; height:150px; background-color:darkblue; margin: 3%; color:white;">    
+    <span>{{apply.id}}</span>
+      <span>{{apply.userId}}</span>
+      <span>{{apply.offerId}}</span>
+  </article>
+</a>

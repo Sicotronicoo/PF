@@ -1,5 +1,5 @@
-<article *ngIf="authService.isLoggedIn() == false"><h1>CREAR OFERTA</h1></article>
-<article *ngIf="authService.isLoggedIn() == true">
+<article><h1>CREAR OFERTA</h1></article>
+<article>
     <form [formGroup]="form" (submit)="save($event)" style="display:flex; flex-direction: column;">
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>PORCENTAJE</mat-label>

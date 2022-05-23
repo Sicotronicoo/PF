@@ -35,6 +35,7 @@ export class ListoffersComponent implements OnInit {
   currentUser: string;     
   idOffer: string;  
   userId: string;
+  isUserLoggedIn!: boolean;
 
   ngOnInit(): void {
     this.offerService.getOffersByName(this.id).subscribe((res) => {
@@ -45,6 +46,9 @@ export class ListoffersComponent implements OnInit {
         };
       });
     });       
+    this.authService.loggedIn$.subscribe(
+      (loggedIn) => (this.isUserLoggedIn = loggedIn)
+    );
   }
   
   deleteOffer(idOffer: string){
@@ -53,7 +57,6 @@ export class ListoffersComponent implements OnInit {
 
   async save(idOffer: string){
     const doc = await this.applyofferservice.addApplyOffer("APPLYSOFFER", idOffer, this.currentUser);
-   // this.router.navigate(["main"]);
   }
   checkUserId(userId:string){     
     return this.currentUser === userId;

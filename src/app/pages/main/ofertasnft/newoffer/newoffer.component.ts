@@ -28,6 +28,7 @@ export class NewofferComponent implements OnInit {
   routeParams = this.route.snapshot.paramMap;
   id = this.routeParams.get('nameNft');
   userId: string;
+  isUserLoggedIn!: boolean;
 
   form = this.fb.group({
     porcentaje:[null, Validators.required],
@@ -36,7 +37,9 @@ export class NewofferComponent implements OnInit {
   })
 
   ngOnInit(): void {
-     
+    this.authService.loggedIn$.subscribe(
+      (loggedIn) => (this.isUserLoggedIn = loggedIn)
+    );
   }
 
   async save(event: Event){

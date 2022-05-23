@@ -5,9 +5,9 @@
         <span>{{offer.nft}}</span>
         <span>{{offer.porcentaje}}</span>
         <span>{{offer.descripcion}}</span>
-        <button type="button" *ngIf="checkUserId(offer.userId) == true && authService.isLoggedIn() == true" (click)="deleteOffer(offer.id)">BORRAR OFERTA</button>
-        <button type="button" *ngIf="checkUserId(offer.userId) == false && authService.isLoggedIn() == true" routerLink="createnft" (click)="save(offer.id)" routerLink="/dashboard">APLICAR A OFERTA</button>
-        <button type="button" *ngIf="checkUserId(offer.userId) == true && authService.isLoggedIn() == true" routerLink="createnft" routerLink="/dashboard">DETALLES DE LA OFERTA</button>
+        <button type="button" *ngIf="checkUserId(offer.userId) == true && isUserLoggedIn" (click)="deleteOffer(offer.id)">BORRAR OFERTA</button>
+        <button type="button" *ngIf="checkUserId(offer.userId) == false && isUserLoggedIn" routerLink="/main/{{id}}" (click)="save(offer.id)">APLICAR A OFERTA</button>
+        <button type="button" *ngIf="checkUserId(offer.userId) == true && isUserLoggedIn" routerLink="/dashboard">DETALLES DE LA OFERTA</button>
     </article>
   </a>
   

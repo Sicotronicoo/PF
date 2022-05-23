@@ -46,10 +46,15 @@ export class OfertasnftComponent implements OnInit {
   web: string;
   isShown: boolean = false ; // hidden by default
   delete: boolean = false;
+  isUserLoggedIn!: boolean;
+  
   toggleShow() {
     this.isShown = ! this.isShown;    
   }
-  ngOnInit(): void {    
+  ngOnInit(): void {   
+    this.authService.loggedIn$.subscribe(
+      (loggedIn) => (this.isUserLoggedIn = loggedIn)
+    ); 
   }
   
  async deleteNft(){

@@ -1,14 +1,11 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { User } from './interfaces/user';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import firebase from 'firebase/compat/app';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-
-import { AngularFirestore, AngularFirestoreDocument, DocumentData, } from '@angular/fire/compat/firestore';
-import { Router } from '@angular/router';
+import { AngularFirestore,  DocumentData, } from '@angular/fire/compat/firestore';
 import { collection, doc, DocumentReference, serverTimestamp, setDoc } from 'firebase/firestore';
 import { Firestore } from '@angular/fire/firestore';
-import { stringify } from 'querystring';
+
+import { Observable, map, BehaviorSubject } from 'rxjs';
 
 interface Data {
   [x: string]: any;
@@ -22,10 +19,18 @@ export class AuthService {
   constructor(
     private afauth: AngularFireAuth,
     private db: Firestore,
+    private angularfirestore: AngularFirestore
 
-  ) { }
+  ) {
+    this.afauth.authState.subscribe(res => {
+      this.email = res?.email;
+    });
+  }
 
-    loggedIn: boolean = false;
+  private loggedIn = new BehaviorSubject<boolean>(false);
+  loggedIn$ = this.loggedIn.asObservable();
+  email: string;
+
   async create(path: string, data: Data) {
     this.register(data.email, data.password);
     const link = data.email;
@@ -55,32 +60,47 @@ export class AuthService {
 
   async login(email: string, password: string) {
     try {
-      this.loggedIn = true;
+      this.loggedIn.next(true);
       return await this.afauth.signInWithEmailAndPassword(email, password);
     } catch (err) {
+      this.loggedIn.next(false);
       console.log("error en login: ", err);
       return null;
     }
+  }
+
+  logout() {
+    this.loggedIn.next(false);
+    this.afauth.signOut();
+    console.log('adios');
   }
 
   getUserLogged() {
     return this.afauth.authState;
   }
 
-  logout() {
-    this.loggedIn = false;
-    this.afauth.signOut();
-    console.log('adios');
-  }
-
   isLoggedIn(){
-  return this.loggedIn;
+    return this.loggedIn$;
   }
-  checkUserId(userId: string){ 
+  
+  checkUserId(userId: string) {
     let user: string;
     this.afauth.authState.subscribe(res => {
       user = res?.email;
     });
     return user === userId;
+  }
+
+  getInfoUser(): Observable<User> {  
+    const collection = this.angularfirestore.collection<User>('USERS', ref => ref.where('email', '==',  this.email));
+    const user$ = collection
+      .valueChanges()
+      .pipe(
+        map(users => {
+          const user = users[0];
+          return user;
+        })
+      );
+    return user$;
   }
 }
