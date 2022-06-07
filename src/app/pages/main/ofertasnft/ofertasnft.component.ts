@@ -1,11 +1,7 @@
-import { query } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollectionGroup } from '@angular/fire/compat/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Firestore } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
-import { collection, where, doc, getDoc } from 'firebase/firestore';
-import { map, Observable } from 'rxjs';
-import { Nft } from '../../../shared/services/interfaces/nft';
 import { NftService } from '../../../shared/services/nft.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
@@ -35,6 +31,7 @@ export class OfertasnftComponent implements OnInit {
       this.nameCrypto = user.nameCrypto;
       this.nameNft = user.nameNft;
       this.web = user.web;
+      this.urlPhoto = user.urlPhoto;
     });
     if(this.delete){
     }
@@ -44,6 +41,7 @@ export class OfertasnftComponent implements OnInit {
   nameCrypto: string;
   nameNft: string;
   web: string;
+  urlPhoto: string;
   isShown: boolean = false ; // hidden by default
   delete: boolean = false;
   isUserLoggedIn!: boolean;

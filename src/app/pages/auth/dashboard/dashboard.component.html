@@ -20,24 +20,31 @@
 <button class="btn btn-primary btn-block m-2" (click)="logout()">LOGOUT</button>
 <!-- <button class="btn btn-primary btn-block m-2" (click)="obtenerUsuarioLogeado()">USUARIO</button>
  -->
+<h1>OFERTAS CREADAS</h1>
 <a style="display:flex; flex-direction: colum;width:200px; height:200px;" *ngFor="let offer of offers">
-  <h1>OFERTAS CREADAS</h1>
   <br>
-  <article style="display:flex; flex-direction: column;width:150px; height:150px; background-color:darkblue; margin: 3%; color:white;">    
+  <article
+    style="display:flex; flex-direction: column;width:150px; height:150px; background-color:darkblue; margin: 3%; color:white;">
     <span>{{offer.id}}</span>
-      <span>{{offer.userId}}</span>
-      <span>{{offer.nameNft}}</span>
-      <span>{{offer.descripcion}}</span>
-      <span>{{offer.porcentaje}}</span>
-      <span>{{offer.duracion}}</span>
+    <span>{{offer.userId}}</span>
+    <span>{{offer.nameNft}}</span>
+    <span>{{offer.descripcion}}</span>
+    <span>{{offer.porcentaje}}</span>
+    <span>{{offer.duracion}}</span>
   </article>
 </a>
+<h1>OFERTAS APLICADAS</h1>
 <a style="display:flex; flex-direction: colum;width:200px; height:200px;" *ngFor="let apply of applysOffer">
-  <h1>OFERTAS APLICADAS</h1>
   <br>
-  <article style="display:flex; flex-direction: column;width:150px; height:150px; background-color:darkblue; margin: 3%; color:white;">    
+  <article
+    style="display:flex; flex-direction: column;width:150px; height:150px; background-color:darkblue; margin: 3%; color:white;">
     <span>{{apply.id}}</span>
-      <span>{{apply.userId}}</span>
-      <span>{{apply.offerId}}</span>
+    <span>{{apply.userId}}</span>
+    <span>{{apply.offerId}}</span>
   </article>
 </a>
+<h1>Candidatos</h1>
+<div style="display: flex; flex-direction: column;" *ngFor="let candidate of candidates">
+  <span>{{candidate.userId}}</span>
+  <span>{{candidate.offerId}}</span>
+</div>

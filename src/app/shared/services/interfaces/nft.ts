@@ -5,6 +5,7 @@ export class Nft {
     nameNft: string;
     nameCrypto: string;
     web: string;
+    urlPhoto: string;
 
     constructor(id, nameNft, nameCrypto,web){
         this.id = id;

@@ -6,6 +6,7 @@ import { Offer } from 'src/app/shared/services/interfaces/offer';
 import { OfferService } from 'src/app/shared/services/offer.service';
 import { AuthService } from '../../../shared/services/auth.service';
 import { Applyoffer } from 'src/app/shared/services/interfaces/applyoffer';
+import { ApplyofferService } from 'src/app/shared/services/applyoffer.service';
 
 
 
@@ -19,11 +20,13 @@ import { Applyoffer } from 'src/app/shared/services/interfaces/applyoffer';
 export class DashboardComponent implements OnInit {
   offers: Offer[];
   applysOffer: Applyoffer[];
+  candidates: Applyoffer[];
   constructor(
     private authService: AuthService,
     private router: Router,
     private db: Firestore,
     private offerService: OfferService,
+    private applysOfferService: ApplyofferService
 
 
   ) {
@@ -63,8 +66,16 @@ export class DashboardComponent implements OnInit {
       });
     }); 
     
+    this.applysOfferService.getCandidatesOffer().subscribe((res) => {
+      this.candidates = res.map( (e) => {
+        return {
+          id:e.payload.doc.id,
+          ...(e.payload.doc.data() as Applyoffer)
+        };
+      });
+    });
   }
-
+  
   logout() {
     this.authService.logout();
     this.router.navigate(['login']);

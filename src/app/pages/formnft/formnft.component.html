@@ -11,11 +11,15 @@
         <mat-label>WEB</mat-label>
         <input matInput placeholder="WEB" formControlName="web" required>
     </mat-form-field>
-    <label style="text-align: center;">IMAGE CRYPTO</label>
-    <input style="text-align: center;" type="file" required>
-    <br>
-    <label style="text-align: center;">IMAGE NFT</label>
-    <input style="text-align: center;" type="file" required>
+    <div class="img">
+        <div *ngIf="!file">
+            <input hidden type="file" multiple id="img" name="img" (change)="loadFile($event)">
+            <button for="img" mat-raised-button type="button"><label for="img">SUBIR FOTO NFT</label></button>
+        </div>
+        <div *ngIf="file">
+            <label for="">Nombre de archivo: {{file.name}}</label>
+        </div>
+    </div>
     <br>
     <button type="submit" [disabled]="!form.valid" color="primary">SAVE</button>
 </form>

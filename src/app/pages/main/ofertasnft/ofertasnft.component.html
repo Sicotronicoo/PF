@@ -2,12 +2,13 @@
 
 <article style="display:flex; flex-direction: row">
     <section style="display:flex; flex-direction: column; width:40%;" >
+    <img src="{{urlPhoto}}" alt="" width="350px">
     <h1>{{id}}</h1>
     <h1>{{nameCrypto}}</h1>
     <h1>{{nameNft}}</h1>
     <h1>{{web}}</h1>
-    <button *ngIf="isShown" type="button" (click)="toggleShow()">CREAR OFERTA</button>
-    <button *ngIf="!isShown" type="button" (click)="toggleShow()">OFERTAS DISPONIBLES</button>
+    <button *ngIf="isShown" type="button" (click)="toggleShow()">OFERTAS DISPONIBLES</button>
+    <button *ngIf="!isShown && isUserLoggedIn" type="button" (click)="toggleShow()">CREAR OFERTA</button>
     <button type="button" *ngIf="isUserLoggedIn" routerLink="createnft" (click)="deleteNft()">BORRAR CRYPTO</button>
 
     </section>

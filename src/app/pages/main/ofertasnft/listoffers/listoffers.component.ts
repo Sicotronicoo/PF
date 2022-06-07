@@ -55,8 +55,8 @@ export class ListoffersComponent implements OnInit {
     this.offerService.delete(idOffer);
   }
 
-  async save(idOffer: string){
-    const doc = await this.applyofferservice.addApplyOffer("APPLYSOFFER", idOffer, this.currentUser);
+  async save(idOffer: string, userId: string){
+    await this.applyofferservice.addApplyOffer("APPLYSOFFER", idOffer, this.currentUser, userId);
   }
   checkUserId(userId:string){     
     return this.currentUser === userId;
