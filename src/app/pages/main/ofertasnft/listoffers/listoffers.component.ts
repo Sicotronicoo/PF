@@ -5,7 +5,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { resolve } from 'dns';
 import { collection, where, query} from 'firebase/firestore';
-import { Subject, switchMap } from 'rxjs';
+import { Subject, Subscription, switchMap } from 'rxjs';
 import { ApplyofferService } from 'src/app/shared/services/applyoffer.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Offer } from 'src/app/shared/services/interfaces/offer';
@@ -18,6 +18,7 @@ import { OfferService } from '../../../../shared/services/offer.service'
   styleUrls: ['./listoffers.component.scss']
 })
 export class ListoffersComponent implements OnInit {
+
 
   constructor(
     private offerService: OfferService,
@@ -36,6 +37,8 @@ export class ListoffersComponent implements OnInit {
       this.currentUser = res?.email;          
    });
   }
+  isUserApply$ = this.applyofferservice.checApply$;
+
 
   routeParams = this.route.snapshot.paramMap;
   id = this.routeParams.get('nameNft');
@@ -45,20 +48,37 @@ export class ListoffersComponent implements OnInit {
   idOffer: string;  
   userId: string;
   isUserLoggedIn!: boolean;
+  isUserApply!: boolean;
+
+  userApply!: boolean;
+  private subscription!: Subscription;
 
   ngOnInit(): void {
+    this.authService.loggedIn$.subscribe(
+      (loggedIn) => (this.isUserLoggedIn = loggedIn)
+    );
+
     this.offerService.getOffersByName(this.id).subscribe((res) => {
       this.offers = res.map( (e) =>{
+       // console.log(this.currentUser, e.payload.doc.data().userId,  e.payload.doc.data().id);
+        this.applyofferservice.test(this.currentUser, e.payload.doc.data().userId, e.payload.doc.data().id);
+        let ext: boolean;
+        this.applyofferservice.checApply$.subscribe(
+          (loggedIn) => (ext = loggedIn, console.log(loggedIn)
+          )
+        );
         return{
           id: e.payload.doc.id,
-          check: this.checkCandidateApply,
+          check: ext,
           ...(e.payload.doc.data() as Offer)
         };
       });
     });       
-    this.authService.loggedIn$.subscribe(
-      (loggedIn) => (this.isUserLoggedIn = loggedIn)
-    );
+    
+  }
+  test(userOffer: string, offerId: string){
+
+    
   }
   
   deleteOffer(idOffer: string){
@@ -70,10 +90,6 @@ export class ListoffersComponent implements OnInit {
   }
   checkUserId(userId:string){     
     return this.currentUser === userId;
-  }
-
-  checkCandidateApply(){
-    return this.applyofferservice.test();
   }
 
 }

@@ -4,4 +4,5 @@ export class Applyoffer {
     offerId: string;
     createdAt: string;
     updatedAt: string;
+    userOffer: string;
 }

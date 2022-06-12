@@ -26,8 +26,9 @@ export class ApplyofferService implements OnDestroy {
   ) { 
   }
 
-  private apply = new BehaviorSubject<boolean>(false);
+  private apply = new BehaviorSubject<boolean>(true);
   checApply$ = this.apply.asObservable();
+  
   ngOnDestroy(): void {
     
   }
@@ -56,22 +57,24 @@ export class ApplyofferService implements OnDestroy {
     .snapshotChanges()
   }
 
-  checkCandidateApply(){
+/*   checkCandidateApply(){
     const querySnapshot = getDocs(query(collection(this.db, "APPLYSOFFER"), where("userId", "==", "test@test.com"), where("userOffer", "==", "luis@luis.com")));
     return querySnapshot.then( data => { 
       console.log(data.size.valueOf());
       return Promise.resolve(data.size.valueOf())
     });
- }
- test(){
-  let t: number;
-  const q = query(collection(this.db, "APPLYSOFFER"), where("userId", "==", "test@test.com"), where("userOffer", "==", "luis@luis.com"));
+ } */
+ taman: Number;
+
+ test(userId: string, userOffer: string, offerId: string){
+  const q = query(collection(this.db, "APPLYSOFFER"), where("userId", "==", userId), where("userOffer", "==", userOffer), where("offerId", "==", offerId));
   onSnapshot(q, (snapshot)=>{
-    const y = snapshot.size
-    console.log(t);
-    t = y;
+    if(snapshot.size > 0){     
+      this.apply.next(true);
+    }else{
+      this.apply.next(false);
+    }
   })
-  return t
 }
 
 
