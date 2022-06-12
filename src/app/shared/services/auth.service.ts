@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { User } from './interfaces/user';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore,  DocumentData, } from '@angular/fire/compat/firestore';
-import { collection, doc, DocumentReference, serverTimestamp, setDoc } from 'firebase/firestore';
+import { AngularFirestore, DocumentData, } from '@angular/fire/compat/firestore';
+import { collection, doc, DocumentReference, onSnapshot, serverTimestamp, setDoc, query, where, getDoc } from 'firebase/firestore';
 import { Firestore } from '@angular/fire/firestore';
 
 import { Observable, map, BehaviorSubject } from 'rxjs';
@@ -27,6 +27,8 @@ export class AuthService {
     });
   }
 
+  private isAdmin = new BehaviorSubject<boolean>(false);
+  isAdmin$ = this.isAdmin.asObservable();
   private loggedIn = new BehaviorSubject<boolean>(false);
   loggedIn$ = this.loggedIn.asObservable();
   email: string;
@@ -60,6 +62,9 @@ export class AuthService {
 
   async login(email: string, password: string) {
     try {
+      this.isUserAdmin(email);
+      const q = this.isUserAdmin(email);
+
       this.loggedIn.next(true);
       return await this.afauth.signInWithEmailAndPassword(email, password);
     } catch (err) {
@@ -71,6 +76,7 @@ export class AuthService {
 
   logout() {
     this.loggedIn.next(false);
+    this.isAdmin.next(false);
     this.afauth.signOut();
     console.log('adios');
   }
@@ -79,10 +85,10 @@ export class AuthService {
     return this.afauth.authState;
   }
 
-  isLoggedIn(){
+  isLoggedIn() {
     return this.loggedIn$;
   }
-  
+
   checkUserId(userId: string) {
     let user: string;
     this.afauth.authState.subscribe(res => {
@@ -91,8 +97,8 @@ export class AuthService {
     return user === userId;
   }
 
-  getInfoUser(): Observable<User> {  
-    const collection = this.angularfirestore.collection<User>('USERS', ref => ref.where('email', '==',  this.email));
+  getInfoUser(): Observable<User> {
+    const collection = this.angularfirestore.collection<User>('USERS', ref => ref.where('email', '==', this.email));
     const user$ = collection
       .valueChanges()
       .pipe(
@@ -102,5 +108,46 @@ export class AuthService {
         })
       );
     return user$;
+  }
+
+
+  async isUserAdmin(email: string) {
+
+    const docRef = doc(this.db, `USERS/${email}`);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      if(docSnap.get('admin') == true){
+        this.isAdmin.next(true);
+        console.log(this.isAdmin.value);        
+      }else{
+        this.isAdmin.next(false);
+        console.log(this.isAdmin.value);
+      }
+    } else {
+      this.isAdmin.next(false);
+      console.log("No such document!");
+    }
+
+
+    /* const q = query(collection(this.db, "USERS"), where("admin", "==", true), where('email', "==", email));
+      onSnapshot(q, (snapshot)=>{
+        console.log(snapshot.size);      
+        if(snapshot.size > 0){     
+          console.log('User match');        
+          this.isAdmin.next(true);
+        }else{
+          console.log('No admin');
+          this.isAdmin.next(false);
+        }
+      }) */
+          /* const q = query(collection(this.db, "USERS"), where("admin", "==", true), where('email', "==", email));
+    let size: number;
+    onSnapshot(q, (snapshot)=>{
+      size = snapshot.size;
+      console.log(snapshot.size);
+    })
+    console.log(size);
+    
+    return size; */
   }
 }

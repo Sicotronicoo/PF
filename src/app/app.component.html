@@ -8,13 +8,10 @@
       <a routerLink="/main" class="a">MAIN</a>
       <a routerLink="/login" class="a" *ngIf="!isUserLoggedIn">LOGIN</a> 
       <a routerLink="/dashboard" class="a" *ngIf="isUserLoggedIn">PERFIL</a> 
-      <a routerLink="/createnft" class="a" *ngIf="isUserLoggedIn">ADD NFT</a> 
+      <a routerLink="/createnft" class="a" *ngIf="isAdmin$ | async">ADD NFT</a> 
     </div> 
-  </mat-toolbar>
-  
+  </mat-toolbar>  
   <router-outlet>
-
   </router-outlet>
-
   <footer style="height:20%; width: 100%; background-color:#3f51b5;">
   </footer>

@@ -37,6 +37,7 @@ export class OfertasnftComponent implements OnInit {
     }
   }
 
+  isAdmin$ = this.authService.isAdmin$;
   id: string;
   nameCrypto: string;
   nameNft: string;

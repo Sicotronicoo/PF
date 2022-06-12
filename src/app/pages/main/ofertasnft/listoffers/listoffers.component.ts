@@ -28,10 +28,10 @@ export class ListoffersComponent implements OnInit {
    });
   }
 
+  isAdmin$ = this.authService.isAdmin$;
   routeParams = this.route.snapshot.paramMap;
   id = this.routeParams.get('nameNft');
   offers: Offer[];
-
   currentUser: string;     
   idOffer: string;  
   userId: string;
