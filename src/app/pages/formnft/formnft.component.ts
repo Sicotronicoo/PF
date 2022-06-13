@@ -25,10 +25,11 @@ export class FormnftComponent implements OnInit {
     nameNft: [null, Validators.required],
     nameCrypto: [null, Validators.required],
     web:[null, Validators.required],
-    urlPhoto: [null, Validators.required]
+    urlPhoto: [null, Validators.required],
   })
+
   ngOnInit(): void {
-    
+
   }
 
   async save(event: Event){

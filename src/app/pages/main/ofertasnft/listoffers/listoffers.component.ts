@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ApplyofferService } from 'src/app/shared/services/applyoffer.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Applyoffer } from 'src/app/shared/services/interfaces/applyoffer';
@@ -13,7 +14,7 @@ import { OfferService } from '../../../../shared/services/offer.service'
   templateUrl: './listoffers.component.html',
   styleUrls: ['./listoffers.component.scss']
 })
-export class ListoffersComponent implements OnInit {
+export class ListoffersComponent implements OnInit, OnDestroy  {
 
   constructor(
     private offerService: OfferService,
@@ -40,13 +41,12 @@ export class ListoffersComponent implements OnInit {
   applyOffers: Applyoffer[];
 
   ngOnInit(): void {
-    this.applyofferservice.getApplyOfferByUser().subscribe((res) => {
+     this.applyofferservice.getApplyOfferByUser().subscribe((res) => {
       this.applyOffers =  res.map((e) => {
-        console.log( e.payload.doc.data());
-        
+        console.log( e.payload.doc.data());        
         return e.payload.doc.data();
-      })
-    })
+      });
+    });
     this.offerService.getOffersByName(this.id).subscribe((res) => {
       this.offers = res.map( (e) =>{
         return{
@@ -58,6 +58,9 @@ export class ListoffersComponent implements OnInit {
     this.authService.loggedIn$.subscribe(
       (loggedIn) => (this.isUserLoggedIn = loggedIn)
     );
+  }
+  ngOnDestroy() {
+
   }
 
   deleteOffer(idOffer: string){
@@ -84,4 +87,5 @@ export class ListoffersComponent implements OnInit {
       }
     });
   }
+    
 }

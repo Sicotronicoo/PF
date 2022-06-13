@@ -38,6 +38,7 @@ export class OfferService {
       id,
       nameNft: nameNft,
       userId: userId,
+      open: true,
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp()
     }
@@ -46,6 +47,14 @@ export class OfferService {
       await setDoc(docRef, docData);
       resolve(docRef);
     });
+  }
+  updateOffer(data: boolean, offerId: string) {
+    return this.angularFirestore
+      .collection("OFFERS")
+      .doc(offerId)
+      .update({
+        open: data,
+      });
   }
 
   getOffers(){
@@ -56,7 +65,7 @@ export class OfferService {
 
   getOffersByName(nameNft: string){
     return this.angularFirestore
-    .collection<Offer>('OFFERS', ref => ref.where('nameNft', '==', nameNft))
+    .collection<Offer>('OFFERS', ref => ref.where('nameNft', '==', nameNft).where('open', "==", true))
     .snapshotChanges()
   }
 

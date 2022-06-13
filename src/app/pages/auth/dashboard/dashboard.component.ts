@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { doc, collection, setDoc, getDoc } from 'firebase/firestore';
 import { Offer } from 'src/app/shared/services/interfaces/offer';
 import { OfferService } from 'src/app/shared/services/offer.service';
 import { AuthService } from '../../../shared/services/auth.service';
 import { Applyoffer } from 'src/app/shared/services/interfaces/applyoffer';
 import { ApplyofferService } from 'src/app/shared/services/applyoffer.service';
+import { ContratoService } from 'src/app/shared/services/contrato.service';
 
 
 
@@ -26,7 +26,8 @@ export class DashboardComponent implements OnInit {
     private router: Router,
     private db: Firestore,
     private offerService: OfferService,
-    private applysOfferService: ApplyofferService
+    private applysOfferService: ApplyofferService,
+    private contratoService: ContratoService,
 
 
   ) {
@@ -79,6 +80,13 @@ export class DashboardComponent implements OnInit {
   logout() {
     this.authService.logout();
     this.router.navigate(['login']);
+  }
+
+  async saveContrato(idApply: string, userId: string,userOffer: string, offerId:string){
+    await this.offerService.updateOffer(false, offerId);
+
+    await this.contratoService.addContrato(idApply, userId, userOffer, offerId, "CONTRATOS");
+
   }
 
 }

@@ -47,4 +47,7 @@
 <div style="display: flex; flex-direction: column;" *ngFor="let candidate of candidates">
   <span>{{candidate.userId}}</span>
   <span>{{candidate.offerId}}</span>
+  
+  <button type="button" (click)="saveContrato(candidate.id, candidate.userId, candidate.userOffer, candidate.offerId)">CONTRATAR</button>
+  : string, : string,: string, :string
 </div>
