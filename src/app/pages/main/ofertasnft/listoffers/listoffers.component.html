@@ -12,7 +12,7 @@
             <button type="button"(click)="deleteOffer(offer.id)">BORRAR OFERTA</button>
           </ng-template>
          
-        <button type="button" *ngIf="checkUserId(offer.userId) == false && isUserLoggedIn" routerLink="/main/{{id}}" (click)="save(offer.id, offer.userId)">APLICAR A OFERTA</button>
+        <button type="button" *ngIf="checkUserId(offer.userId) == false && isUserLoggedIn && !isUserApply(offer.id)" routerLink="/main/{{id}}" (click)="save(offer.id, offer.userId)">Aplicar</button>
         <button type="button" *ngIf="checkUserId(offer.userId) == true && isUserLoggedIn" routerLink="/dashboard">DETALLES DE LA OFERTA</button>
         <button type="button" *ngIf="checkUserId(offer.userId) == true && isUserLoggedIn" routerLink="/dashboard">EDITAR OFERTA</button>
       </article>

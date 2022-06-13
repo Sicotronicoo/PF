@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApplyofferService } from 'src/app/shared/services/applyoffer.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { Applyoffer } from 'src/app/shared/services/interfaces/applyoffer';
 import { Offer } from 'src/app/shared/services/interfaces/offer';
 import { NftService } from 'src/app/shared/services/nft.service';
 import { OfferService } from '../../../../shared/services/offer.service'
@@ -36,8 +37,16 @@ export class ListoffersComponent implements OnInit {
   idOffer: string;  
   userId: string;
   isUserLoggedIn!: boolean;
+  applyOffers: Applyoffer[];
 
   ngOnInit(): void {
+    this.applyofferservice.getApplyOfferByUser().subscribe((res) => {
+      this.applyOffers =  res.map((e) => {
+        console.log( e.payload.doc.data());
+        
+        return e.payload.doc.data();
+      })
+    })
     this.offerService.getOffersByName(this.id).subscribe((res) => {
       this.offers = res.map( (e) =>{
         return{
@@ -50,7 +59,7 @@ export class ListoffersComponent implements OnInit {
       (loggedIn) => (this.isUserLoggedIn = loggedIn)
     );
   }
-  
+
   deleteOffer(idOffer: string){
     this.offerService.delete(idOffer);
   }
@@ -60,5 +69,12 @@ export class ListoffersComponent implements OnInit {
   }
   checkUserId(userId:string){     
     return this.currentUser === userId;
+  }
+
+  isUserApply(offerId: string) {
+    
+    return this.applyOffers.some((apply) =>{
+      return apply.offerId === offerId;
+    });
   }
 }

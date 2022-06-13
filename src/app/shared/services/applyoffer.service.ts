@@ -46,4 +46,9 @@ export class ApplyofferService {
     .collection<Applyoffer>('APPLYSOFFER', ref => ref.where('userOffer', '==', this.auth.email))
     .snapshotChanges()
   }
+  getApplyOfferByUser(){
+    return this.afs
+    .collection<Applyoffer>('APPLYSOFFER', ref => ref.where('userId', '==', this.auth.email))
+    .snapshotChanges()
+  }
 }
