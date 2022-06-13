@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DocumentData, AngularFirestore } from '@angular/fire/compat/firestore';
 import { Firestore } from '@angular/fire/firestore';
-import { collection, doc, DocumentReference, serverTimestamp, setDoc } from 'firebase/firestore';
+import { collection, deleteDoc, doc, DocumentReference, serverTimestamp, setDoc } from 'firebase/firestore';
 import { AuthService } from './auth.service';
 import { Applyoffer } from './interfaces/applyoffer';
 
@@ -46,9 +46,14 @@ export class ApplyofferService {
     .collection<Applyoffer>('APPLYSOFFER', ref => ref.where('userOffer', '==', this.auth.email))
     .snapshotChanges()
   }
+
   getApplyOfferByUser(){
     return this.afs
     .collection<Applyoffer>('APPLYSOFFER', ref => ref.where('userId', '==', this.auth.email))
     .snapshotChanges()
+  }
+  
+  deleteApplyUser(id: string){
+    return deleteDoc(doc(this.db, "APPLYSOFFER", id));
   }
 }

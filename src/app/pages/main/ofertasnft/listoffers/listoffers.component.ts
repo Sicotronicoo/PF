@@ -71,10 +71,17 @@ export class ListoffersComponent implements OnInit {
     return this.currentUser === userId;
   }
 
-  isUserApply(offerId: string) {
-    
+  isUserApply(offerId: string) {    
     return this.applyOffers.some((apply) =>{
       return apply.offerId === offerId;
+    });
+  }
+
+  deleteApplyUser(offerId: string){
+    this.applyOffers.some((apply) =>{
+      if(apply.offerId === offerId){
+        this.applyofferservice.deleteApplyUser(apply.id);
+      }
     });
   }
 }
