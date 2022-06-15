@@ -78,7 +78,6 @@ export class AuthService {
     this.loggedIn.next(false);
     this.isAdmin.next(false);
     this.afauth.signOut();
-    console.log('adios');
   }
 
   getUserLogged() {
@@ -118,36 +117,13 @@ export class AuthService {
     if (docSnap.exists()) {
       if(docSnap.get('admin') == true){
         this.isAdmin.next(true);
-        console.log(this.isAdmin.value);        
       }else{
         this.isAdmin.next(false);
-        console.log(this.isAdmin.value);
       }
     } else {
       this.isAdmin.next(false);
       console.log("No such document!");
     }
 
-
-    /* const q = query(collection(this.db, "USERS"), where("admin", "==", true), where('email', "==", email));
-      onSnapshot(q, (snapshot)=>{
-        console.log(snapshot.size);      
-        if(snapshot.size > 0){     
-          console.log('User match');        
-          this.isAdmin.next(true);
-        }else{
-          console.log('No admin');
-          this.isAdmin.next(false);
-        }
-      }) */
-          /* const q = query(collection(this.db, "USERS"), where("admin", "==", true), where('email', "==", email));
-    let size: number;
-    onSnapshot(q, (snapshot)=>{
-      size = snapshot.size;
-      console.log(snapshot.size);
-    })
-    console.log(size);
-    
-    return size; */
   }
 }

@@ -58,7 +58,6 @@ export class OfertasnftComponent implements OnInit {
   
  async deleteNft(){
     this.nftService.delete(this.nameNft);
-    console.log('El NFT; ' + this.delete + ' ha sido borrado.');
   }
 
 }

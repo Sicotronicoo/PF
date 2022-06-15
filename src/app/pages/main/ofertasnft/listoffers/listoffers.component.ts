@@ -43,7 +43,6 @@ export class ListoffersComponent implements OnInit, OnDestroy  {
   ngOnInit(): void {
      this.applyofferservice.getApplyOfferByUser().subscribe((res) => {
       this.applyOffers =  res.map((e) => {
-        console.log( e.payload.doc.data());        
         return e.payload.doc.data();
       });
     });

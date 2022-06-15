@@ -24,7 +24,6 @@ export class LoginComponent {
 
   ingresar() {
     this.authService.login(this.form.value.email, this.form.value.password).then(res => {
-      console.log("se logeo", res);
       this.email = this.form.value.email;
       this.router.navigate(['main']);
     })
