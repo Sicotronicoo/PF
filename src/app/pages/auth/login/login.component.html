@@ -10,10 +10,10 @@
         <mat-label>Password</mat-label>
         <input matInput placeholder="Password" type="password" required  formControlName="password">
       </mat-form-field>
-      <br>
         <button class="a" (click)="ingresar()" [disabled]="!form.valid">INICIAR SESIÓN</button>
+        <br>
+        <span>Si no estas registrado pulsa <a routerLink="/register" style="color: darkblue">aqui</a>.</span>
     </form>
   </section>
 </article>
-<a routerLink="/register">Registrarse</a>
 

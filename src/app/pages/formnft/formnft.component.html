@@ -1,4 +1,9 @@
-<form [formGroup]="form" (submit)="save($event)" style="display:flex; flex-direction: column;">
+<div style="width:100%;">
+ 
+<form [formGroup]="form" (submit)="save($event)" style="display:flex; flex-direction: column; padding: 200px;">
+    <div style="display: flex; justify-content: center;">
+        <h1>FORMULARIO PARA REGISTRAR NUEVO JUEGO NFT</h1>
+    </div>
     <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>NAME NFT</mat-label>
         <input matInput placeholder="NOMBRE NFT" formControlName="nameNft" required>
@@ -11,7 +16,7 @@
         <mat-label>WEB</mat-label>
         <input matInput placeholder="WEB" formControlName="web" required>
     </mat-form-field>
-    <div class="img">
+    <div class="img" style="display: flex; justify-content: center;">
         <div *ngIf="!file">
             <input hidden type="file" multiple id="img" name="img" (change)="loadFile($event)">
             <button for="img" mat-raised-button type="button"><label for="img">SUBIR FOTO NFT</label></button>
@@ -23,3 +28,4 @@
     <br>
     <button type="submit" [disabled]="!form.valid" color="primary">SAVE</button>
 </form>
+</div>

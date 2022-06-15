@@ -1,4 +1,4 @@
-<a style="display:flex; flex-direction: colum;width:200px; height:200px;" *ngFor="let nft of nfts"
+<!-- <a style="display:flex; flex-direction: colum;width:200px; height:200px;" *ngFor="let nft of nfts"
   [routerLink]="[nft.nameNft]">
   <div style="display:flex; flex-direction: column;width:150px; height:150px; background-color:grey; margin: 3%;">
     <img src="{{nft.urlPhoto}}" alt="{{nft.name}}">
@@ -6,4 +6,22 @@
     <span style="color: white">{{nft.nameCrypto}}</span>
     <span style="color: white">{{nft.web}}</span>
   </div>
-</a>
+</a> -->
+<div class="container">
+  <div class="tarjeta" *ngFor="let nft of nfts">
+    <div class="caja">
+      <div class="box">
+        <img src="{{nft.urlPhoto}}" alt="{{nft.name}}">
+      </div>
+    </div>
+    <div style="background-color: white;">
+      <br>
+      <strong><span style="color: dark; ">{{nft.nameNft}}</span></strong>
+      <br>
+      <strong><span style="color: dark">Cryptomoneda: {{nft.nameCrypto}}</span></strong>
+      <br>
+      <a style="color: black;" href="{{nft.web}}" target="_blank">{{nft.web}}</a>
+    </div>
+    <button class="grow_box" [routerLink]="[nft.nameNft]">+ INFO</button>
+    </div>
+</div>

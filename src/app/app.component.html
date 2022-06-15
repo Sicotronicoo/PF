@@ -1,17 +1,14 @@
-  <mat-toolbar color="primary" style="display: flex;justify-content: space-between; height: 10%; " >
-    <div style="display: flex; ">
-      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-      <mat-icon><a routerLink="/main">menu</a></mat-icon>
-    </button>  
-    </div>
-     <div style="display: flex;width:45%; justify-content: space-evenly;" >  
+  <mat-toolbar color="primary" style="display: flex;justify-content: space-around; height: 10%; " >
       <a routerLink="/main" class="a">MAIN</a>
       <a routerLink="/login" class="a" *ngIf="!isUserLoggedIn">LOGIN</a> 
       <a routerLink="/dashboard" class="a" *ngIf="isUserLoggedIn">PERFIL</a> 
       <a routerLink="/createnft" class="a" *ngIf="isAdmin$ | async">ADD NFT</a> 
-    </div> 
   </mat-toolbar>  
   <router-outlet>
   </router-outlet>
-  <footer style="height:20%; width: 100%; background-color:#3f51b5;">
+ 
+  <footer style="width: 100%; background-color:#3f51b5;">
+      <div style="text-align: center; padding: 40px; font-size: 25px;">
+        <p> © 2022 CryptoJobs All rights reserved.</p>
+      </div>
   </footer>
