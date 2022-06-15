@@ -1,53 +1,68 @@
-<!-- Sidebar navigation -->
-<!-- <div class="container-fluid">
-  <a (click)="authService.SignOut()">Log out</a>
+<div style="text-align: center; margin-top: 7em;">
+  <h1>USUARIO {{email}}</h1>
+</div>
+<div style="text-align: center; margin-top: 4em;">
+  <h1>OFERTAS APLICADAS</h1>
+  <table id="keywords" cellspacing="0" cellpadding="0">
+    <thead>
+      <tr>
+        <th><span>APPLY ID</span></th>
+        <th><span>QUIEN APLICA</span></th>
+        <th><span>OFERTA</span></th>
+        <th><span>CREADOR DE OFERTA</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let apply of applysOffer">
+        <td class="lalign">{{apply.id}}</td>
+        <td>{{apply.userId}}</td>
+        <td>{{apply.offerId}}</td>
+        <td>{{apply.userOffer}}</td>
 
-  <div class="row" *ngIf="authService.userData as user">
-            <div class="col-md-12">
-              <div class="media">
-                <div class="media-body">
-                  <p>User ID: <strong>{{user.uid}}</strong></p>
-                  <p>Email: <strong>{{user.email}}</strong></p>
-                </div>
-              </div>
-            </div>
-          </div>
-</div> -->
-<h1>{{id}}</h1>
-<h1>{{email}}</h1>
-<h1>{{displayName}}</h1>
-<h1>here</h1>
-<button class="btn btn-primary btn-block m-2" (click)="logout()">LOGOUT</button>
-<!-- <button class="btn btn-primary btn-block m-2" (click)="obtenerUsuarioLogeado()">USUARIO</button>
- -->
-<h1>OFERTAS CREADAS</h1>
-<a style="display:flex; flex-direction: colum;width:200px; height:200px;" *ngFor="let offer of offers">
-  <br>
-  <article
-    style="display:flex; flex-direction: column;width:150px; height:150px; background-color:darkblue; margin: 3%; color:white;">
-    <span>{{offer.id}}</span>
-    <span>{{offer.userId}}</span>
-    <span>{{offer.nameNft}}</span>
-    <span>{{offer.descripcion}}</span>
-    <span>{{offer.porcentaje}}</span>
-    <span>{{offer.duracion}}</span>
-  </article>
-</a>
-<h1>OFERTAS APLICADAS</h1>
-<a style="display:flex; flex-direction: colum;width:200px; height:200px;" *ngFor="let apply of applysOffer">
-  <br>
-  <article
-    style="display:flex; flex-direction: column;width:150px; height:150px; background-color:darkblue; margin: 3%; color:white;">
-    <span>{{apply.id}}</span>
-    <span>{{apply.userId}}</span>
-    <span>{{apply.offerId}}</span>
-  </article>
-</a>
-<h1>Candidatos</h1>
-<div style="display: flex; flex-direction: column;" *ngFor="let candidate of candidates">
-  <span>{{candidate.userId}}</span>
-  <span>{{candidate.offerId}}</span>
-  
-  <button type="button" (click)="saveContrato(candidate.id, candidate.userId, candidate.userOffer, candidate.offerId)">CONTRATAR</button>
-  : string, : string,: string, :string
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div style="text-align: center; margin-top: 4em;">
+  <h1>OFERTAS CREADAS</h1>
+  <table id="keywords" cellspacing="0" cellpadding="0">
+    <thead>
+      <tr>
+        <th><span>OFFER ID</span></th>
+        <th><span>NAME NFT</span></th>
+        <th><span>PORCENTAJE</span></th>
+        <th><span>DURACION</span></th>
+        <th><span>Rank</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let offer of offers">
+        <td class="lalign">{{offer.id}}</td>
+        <td>{{offer.nameNft}}</td>
+        <td>{{offer.porcentaje}}</td>
+        <td>{{offer.duracion}}</td>
+        <td>{{offer.descripcion}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div style="text-align: center; margin-top: 4em;">
+  <h1>CANDIDATOS</h1>
+  <table id="keywords" cellspacing="0" cellpadding="0">
+    <thead>
+      <tr>
+        <th><span>CANDIDATO</span></th>
+        <th><span>OFERTA</span></th>
+        <th><span>CONTRATAR</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let candidate of candidates">
+        <td class="lalign">{{candidate.userId}}</td>
+        <td>{{candidate.offerId}}</td>
+        <td>  <button type="button" (click)="saveContrato(candidate.id, candidate.userId, candidate.userOffer, candidate.offerId)">CONTRATAR</button></td>
+      </tr>
+    </tbody>
+  </table>
 </div>

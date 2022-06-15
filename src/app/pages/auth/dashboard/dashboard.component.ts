@@ -23,8 +23,6 @@ export class DashboardComponent implements OnInit {
   candidates: Applyoffer[];
   constructor(
     private authService: AuthService,
-    private router: Router,
-    private db: Firestore,
     private offerService: OfferService,
     private applysOfferService: ApplyofferService,
     private contratoService: ContratoService,
@@ -77,10 +75,7 @@ export class DashboardComponent implements OnInit {
     });
   }
   
-  logout() {
-    this.authService.logout();
-    this.router.navigate(['login']);
-  }
+
 
   async saveContrato(idApply: string, userId: string,userOffer: string, offerId:string){
     await this.offerService.updateOffer(false, offerId);

@@ -2,6 +2,7 @@
       <a routerLink="/main" class="a">MAIN</a>
       <a routerLink="/login" class="a" *ngIf="!isUserLoggedIn">LOGIN</a> 
       <a routerLink="/dashboard" class="a" *ngIf="isUserLoggedIn">PERFIL</a> 
+      <a style="cursor: pointer;"*ngIf="isUserLoggedIn" (click)="logout()">LOGOUT</a>
       <a routerLink="/createnft" class="a" *ngIf="isAdmin$ | async">ADD NFT</a> 
   </mat-toolbar>  
   <router-outlet>
