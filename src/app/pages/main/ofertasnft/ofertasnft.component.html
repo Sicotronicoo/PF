@@ -1,24 +1,28 @@
+<article style="width:80%; margin-left:10%; display:flex; flex-direction: row; margin-top: 7em; margin-bottom: 7em;">
+    <section style="display:flex; flex-direction: column; width:40%;">
+        <div>
+            <img style="max-width: 100%; max-height: 400px;"src="{{urlPhoto}}" alt="">
+        </div>
+        <div style="text-align: center;">
+            <h1>{{nameNft}}</h1>
+            <h1>CRYPTO: {{nameCrypto}}</h1>
+            <p>{{web}}</p>
+        </div>   
+        <a class="ov-btn-slide-left" *ngIf="isShown" (click)="toggleShow()">OFERTAS DISPONIBLES</a>
+        <a class="ov-btn-slide-left" *ngIf="!isShown && isUserLoggedIn" type="button" (click)="toggleShow()">CREAR OFERTA</a>
+        <a class="ov-btn-slide-left" *ngIf="isAdmin$ | async" routerLink="createnft" (click)="deleteNft()">BORRAR CRYPTO</a>
 
-
-<article style="display:flex; flex-direction: row">
-    <section style="display:flex; flex-direction: column; width:40%;" >
-    <img src="{{urlPhoto}}" alt="" width="350px">
-    <h1>{{id}}</h1>
-    <h1>{{nameCrypto}}</h1>
-    <h1>{{nameNft}}</h1>
-    <h1>{{web}}</h1>
-    <button *ngIf="isShown" type="button" (click)="toggleShow()">OFERTAS DISPONIBLES</button>
-    <button *ngIf="!isShown && isUserLoggedIn" type="button" (click)="toggleShow()">CREAR OFERTA</button>
-    <button type="button" *ngIf="isAdmin$ | async" routerLink="createnft" (click)="deleteNft()">BORRAR CRYPTO</button>
+        <!-- <button *ngIf="isShown" type="button" (click)="toggleShow()">OFERTAS DISPONIBLES</button>
+        <button *ngIf="!isShown && isUserLoggedIn" type="button" (click)="toggleShow()">CREAR OFERTA</button>
+        <button type="button" *ngIf="isAdmin$ | async" routerLink="createnft" (click)="deleteNft()">BORRAR CRYPTO</button> -->
 
     </section>
-    <section *ngIf="isShown && isUserLoggedIn" style="display:flex; flex-direction: column; width:550px;" >
+    <section *ngIf="isShown && isUserLoggedIn" style="display:flex; flex-direction: column; width:60%;">
         <app-newoffer>
-        </app-newoffer> 
+        </app-newoffer>
     </section>
-    <section *ngIf="!isShown" style="display:flex; flex-direction: column; width:550px; background-color:red;" >
+    <section *ngIf="!isShown" style="display:flex; flex-direction: column; width:60%;">
         <app-listoffers>
         </app-listoffers>
     </section>
-    </article>
-
+</article>

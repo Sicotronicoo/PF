@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MainComponent } from './pages/main/main.component';
 import { AuthGuard } from './shared/guard/auth.guard';
 
 
 const routes: Routes = [
   {
-    path: '', redirectTo: '', pathMatch:'full'
+    path: '', redirectTo: 'main', pathMatch:'full'
   },
   { path: 'main', loadChildren: () => import('./pages/main/main.module').then(m => m.MainModule)},
   { path: 'register', loadChildren: () => import('./pages/auth/sign-up/sign-up.module').then(m => m.SignUpModule) },

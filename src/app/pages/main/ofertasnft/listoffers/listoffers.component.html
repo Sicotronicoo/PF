@@ -1,20 +1,23 @@
-<a style="display:flex; flex-direction: colum;width:200px; height:200px;" *ngFor="let offer of offers">
-    <article style="display:flex; flex-direction: column;width:150px; height:150px; background-color:brown; margin: 3%;">
-      <span>{{offer.id}}</span>
-        <span>{{offer.userId}}</span>
-        <span>{{offer.nft}}</span>
-        <span>{{offer.porcentaje}}</span>
-        <span>{{offer.descripcion}}</span>
-        <div *ngIf="checkUserId(offer.userId) == true && isUserLoggedIn" #loggedOut>
-          <button type="button" (click)="deleteOffer(offer.id)">BORRAR OFERTA</button>
-        </div>
-          <ng-template [ngIf]="isAdmin$ | async" [ngIfElse]="loggedOut">
-            <button type="button"(click)="deleteOffer(offer.id)">BORRAR OFERTA</button>
-          </ng-template>
-        <button type="button" *ngIf="isUserApply(offer.id) && isUserLoggedIn" (click)="deleteApplyUser(offer.id)">Cancelar Solicitud</button>
-        <button type="button" *ngIf="checkUserId(offer.userId) == false && isUserLoggedIn && !isUserApply(offer.id)" routerLink="/main/{{id}}" (click)="save(offer.id, offer.userId)">Aplicar</button>
-        <button type="button" *ngIf="checkUserId(offer.userId) == true && isUserLoggedIn" routerLink="/dashboard">DETALLES DE LA OFERTA</button>
-        <button type="button" *ngIf="checkUserId(offer.userId) == true && isUserLoggedIn" routerLink="/dashboard">EDITAR OFERTA</button>
-      </article>
+<div class="col init">
+  <a class="card card-10 stacked--fan-right me" *ngFor="let offer of offers">
+    <div class="content">
+      <h1>CREADOR</h1>
+      <br>
+      <code class="title">{{offer.userId}}</code>
+      <br>
+      <br>
+      <span>Porcentaje: <strong>{{offer.porcentaje}}</strong></span>
+      <br>
+      <p>{{offer.descripcion}}</p>
+      <br><br>
+      <div *ngIf="checkUserId(offer.userId) == true && isUserLoggedIn" #loggedOut>
+        <a class="ov-btn-slide-left" (click)="deleteOffer(offer.id)">BORRAR OFERTA</a>
+      </div>
+      <ng-template [ngIf]="isAdmin$ | async" [ngIfElse]="loggedOut">
+        <a class="ov-btn-slide-left" (click)="deleteOffer(offer.id)">BORRAR OFERTA</a>
+      </ng-template>
+      <a *ngIf="isUserApply(offer.id) && isUserLoggedIn" (click)="deleteApplyUser(offer.id)" class="ov-btn-slide-left">Cancelar Solicitud</a>
+      <a *ngIf="checkUserId(offer.userId) == false && isUserLoggedIn && !isUserApply(offer.id)" routerLink="/main/{{id}}" (click)="save(offer.id, offer.userId)" class="ov-btn-slide-left">Aplicar</a>
+    </div>
   </a>
-  
+</div>
