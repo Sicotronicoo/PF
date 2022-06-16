@@ -1,14 +1,14 @@
 <div class="col init">
   <a class="card card-10 stacked--fan-right me" *ngFor="let offer of offers">
     <div class="content">
-      <h1>CREADOR</h1>
+      <h1 style="color:black">CREADOR</h1>
       <br>
       <code class="title">{{offer.userId}}</code>
       <br>
       <br>
-      <span>Porcentaje: <strong>{{offer.porcentaje}}</strong></span>
+      <span style="color:black">Porcentaje: <strong>{{offer.porcentaje}}</strong></span>
       <br>
-      <p>{{offer.descripcion}}</p>
+      <p style="color:black">{{offer.descripcion}}</p>
       <br><br>
       <div *ngIf="checkUserId(offer.userId) == true && isUserLoggedIn" #loggedOut>
         <a class="ov-btn-slide-left" (click)="deleteOffer(offer.id)">BORRAR OFERTA</a>
